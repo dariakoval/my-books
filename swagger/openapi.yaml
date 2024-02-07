@@ -2,7 +2,7 @@ openapi: '3.0.0'
 info:
   version: 1.0.0
   title: Swagger My Books
-  description: Online notepad My Books
+  description: Browser notepad My Books
   contact:
     name: Darya Koval
     url: https://github.com/dariakoval
@@ -10,7 +10,7 @@ servers:
   - url: http://localhost:8000
 tags:
   - name: Books servlet
-    description: Operations with your books
+    description: Operations with books
   - name: Genres servlet
     description: Operations with book genres
   - name: Reviews servlet
@@ -29,6 +29,18 @@ paths:
           schema:
             type: integer
             format: int64
+        - name: author
+          in: query
+          description: Book author to return a list of books filtered by author
+          required: false
+          schema:
+            type: string
+        - name: genre
+          in: query
+          description: Book genre to return a list of books filtered by genre
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: List of all books
@@ -55,6 +67,18 @@ paths:
           schema:
             type: integer
             format: int64
+        - name: author
+          in: query
+          description: Book author to return a list of books filtered by author
+          required: false
+          schema:
+            type: string
+        - name: genre
+          in: query
+          description: Book genre to return a list of books filtered by genre
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: List of all books
