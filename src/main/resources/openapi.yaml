@@ -1,0 +1,538 @@
+openapi: '3.0.0'
+info:
+  version: 1.0.0
+  title: Swagger My Books
+  description: Online notepad My Books
+  contact:
+    name: Darya Koval
+    url: https://github.com/dariakoval
+servers:
+  - url: http://localhost:8000
+tags:
+  - name: Books servlet
+    description: Operations with your books
+  - name: Genres servlet
+    description: Operations with book genres
+  - name: Reviews servlet
+    description: Operations with book reviews
+paths:
+  /books:
+    get:
+      tags:
+        - Books servlet
+      summary: Get list of all books
+      parameters:
+        - name: page
+          in: query
+          description: Number of page to return
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: List of all books
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDTO'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+  /books/list:
+    get:
+      tags:
+        - Books servlet
+      summary: Get list of all books
+      parameters:
+        - name: page
+          in: query
+          description: Number of page to return
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: List of all books
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDTO'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+    post:
+      tags:
+        - Books servlet
+      summary: Create new book
+      parameters:
+        - name: title
+          in: query
+          description: Title of the book
+          required: true
+          schema:
+            type: string
+        - name: author
+          in: query
+          description: Author of the book
+          required: true
+          schema:
+            type: string
+        - name: genreName
+          in: query
+          description: Name of the book genre
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Book created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDTO'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+  /books/{id}:
+    get:
+      tags:
+        - Books servlet
+      summary: Get specific book by its id
+      parameters:
+        - name: id
+          in: path
+          description: Id of book to be searched
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Found the book
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDTO'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+  /books/{id}/edit:
+    post:
+      tags:
+        - Books servlet
+      summary: Update book by its id
+      parameters:
+        - name: id
+          in: path
+          description: Id of the book to be updated
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: title
+          in: query
+          description: Title of the book
+          required: true
+          schema:
+            type: string
+        - name: author
+          in: query
+          description: Author of the book
+          required: true
+          schema:
+            type: string
+        - name: genreName
+          in: query
+          description: Name of the book genre
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Book updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDTO'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+  /books/{id}/delete:
+    post:
+      tags:
+        - Books servlet
+      summary: Delete book by its id
+      parameters:
+        - name: id
+          in: path
+          description: Id of book to be deleted
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Book deleted
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+  /genres:
+    get:
+      tags:
+        - Genres servlet
+      summary: Get list of all genres
+      parameters:
+        - name: page
+          in: query
+          description: Number of page to return
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: List of all genres
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenreDTO'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+  /genres/list:
+    get:
+      tags:
+        - Genres servlet
+      summary: Get list of all genres
+      parameters:
+        - name: page
+          in: query
+          description: Number of page to return
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: List of all genres
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenreDTO'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+    post:
+      tags:
+        - Genres servlet
+      summary: Create new genre
+      parameters:
+        - name: name
+          in: query
+          description: Name of the genre
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Genre created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenreDTO'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+  /genres/{id}:
+    get:
+      tags:
+        - Genres servlet
+      summary: Get specific genre by its id
+      parameters:
+        - name: id
+          in: path
+          description: Id of genre to be searched
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Found the genre
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenreDTO'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+  /genres/{id}/edit:
+    post:
+      tags:
+        - Genres servlet
+      summary: Update genre by its id
+      parameters:
+        - name: id
+          in: path
+          description: Id of the genre to be updated
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: name
+          in: query
+          description: Name of the genre
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Genre updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenreDTO'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+  /genres/{id}/delete:
+    post:
+      tags:
+        - Genres servlet
+      summary: Delete genre by its id
+      parameters:
+        - name: id
+          in: path
+          description: Id of genre to be deleted
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Genre deleted
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+  /reviews:
+    get:
+      tags:
+        - Reviews servlet
+      summary: Get list of all reviews
+      parameters:
+        - name: page
+          in: query
+          description: Number of page to return
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: List of all reviews
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewDTO'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+  /reviews/list:
+    get:
+      tags:
+        - Reviews servlet
+      summary: Get list of all reviews
+      parameters:
+        - name: page
+          in: query
+          description: Number of page to return
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: List of all reviews
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewDTO'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+    post:
+      tags:
+        - Reviews servlet
+      summary: Create new review
+      parameters:
+        - name: bookTitle
+          in: query
+          description: Title of the book to review
+          required: true
+          schema:
+            type: string
+        - name: content
+          in: query
+          description: Content of the review
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Review created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewDTO'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+  /reviews/{id}/edit:
+    post:
+      tags:
+        - Reviews servlet
+      summary: Update review by its id
+      parameters:
+        - name: id
+          in: path
+          description: Id of the review to be updated
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: content
+          in: query
+          description: Content of the review
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Review updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewDTO'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+components:
+  schemas:
+    BookDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        author:
+          type: string
+        genreName:
+          type: string
+    GenreDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    ReviewDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        bookTitle:
+          type: string
+        bookAuthor:
+          type: string
+        content:
+          type: string
