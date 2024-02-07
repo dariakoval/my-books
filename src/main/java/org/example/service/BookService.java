@@ -26,7 +26,6 @@ public class BookService {
     public static void showBooks(HttpServletRequest request,
                                  HttpServletResponse response)
             throws IOException, ServletException {
-
         String currentPage = request.getParameter("page");
         int normalizedPage = currentPage == null ? 1 : Integer.parseInt(currentPage);
         String searchAuthor = request.getParameter("author");
