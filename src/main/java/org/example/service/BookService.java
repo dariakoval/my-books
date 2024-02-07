@@ -26,8 +26,10 @@ public class BookService {
     public static void showBooks(HttpServletRequest request,
                                  HttpServletResponse response)
             throws IOException, ServletException {
+
         String currentPage = request.getParameter("page");
         int normalizedPage = currentPage == null ? 1 : Integer.parseInt(currentPage);
+
         String searchAuthor = request.getParameter("author");
         String searchGenre = request.getParameter("genre");
 
@@ -45,9 +47,7 @@ public class BookService {
             return;
         }
 
-        List<BookDTO> bookDTOS = new ArrayList<>(books).stream()
-                .map(BookMapper::toDTO)
-                .toList();
+        List<BookDTO> bookDTOS = new ArrayList<>(books).stream().map(BookMapper::toDTO).toList();
         String resultJsonString = OBJECT_MAPPER.writeValueAsString(bookDTOS);
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
