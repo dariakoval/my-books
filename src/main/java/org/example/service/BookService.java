@@ -29,16 +29,12 @@ public class BookService {
 
         String currentPage = request.getParameter("page");
         int normalizedPage = currentPage == null ? 1 : Integer.parseInt(currentPage);
-
         String searchAuthor = request.getParameter("author");
         String searchGenre = request.getParameter("genre");
 
         List<Book> books;
         try {
-            if (searchAuthor != null && searchGenre != null) {
-                books = BooksRepository.findEntitiesByAuthorAndGenre(searchAuthor, searchGenre,
-                        normalizedPage - 1, ROWS_PER_PAGE);
-            } else if (searchAuthor != null) {
+            if (searchAuthor != null) {
                 books = BooksRepository.findEntitiesByAuthor(searchAuthor, normalizedPage - 1, ROWS_PER_PAGE);
             } else if (searchGenre != null) {
                 books = BooksRepository.findEntitiesByGenre(searchGenre, normalizedPage - 1, ROWS_PER_PAGE);

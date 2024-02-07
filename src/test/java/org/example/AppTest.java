@@ -131,19 +131,6 @@ public class AppTest {
 
     @SneakyThrows
     @Test
-    void testShowBooksByAuthorAndGenre() {
-        var author = testBook.getAuthor();
-        var genre = testBook.getGenre().getName();
-        var response = Unirest.get(baseUrl + "/books?author=" + author + "&genre=" + genre).asString();
-
-        assertThat(response.getStatus()).isEqualTo(200);
-        assertThatJson(response.getBody()).isArray();
-        assertThat(response.getBody()).contains(author);
-        assertThat(response.getBody()).contains(genre);
-    }
-
-    @SneakyThrows
-    @Test
     void testShowBook() {
         var response = Unirest.get(baseUrl + "/books/" + testBook.getId()).asString();
         assertThat(response.getStatus()).isEqualTo(200);

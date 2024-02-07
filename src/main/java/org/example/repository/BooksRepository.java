@@ -103,40 +103,6 @@ public class BooksRepository extends BaseRepository {
         }
     }
 
-    public static List<Book> findEntitiesByAuthorAndGenre(String authorName, String genreName,
-                                                          int page, int rowsPerPage) throws SQLException {
-        var offset = page * rowsPerPage;
-        var sql = String.format("""
-                SELECT * FROM books
-                INNER JOIN genres
-                ON books.genre_id = genres.id
-                WHERE books.author = '%s' AND genres.name = '%s'
-                ORDER BY id LIMIT %d OFFSET %d
-                """, authorName, genreName, rowsPerPage, offset);
-
-        try (var conn = dataSource.getConnection();
-             var stmt = conn.prepareStatement(sql)) {
-            var resultSet = stmt.executeQuery();
-            var books = new ArrayList<Book>();
-
-            while (resultSet.next()) {
-                var id = resultSet.getLong("id");
-                var title = resultSet.getString("title");
-                var author = resultSet.getString("author");
-                var genreId = resultSet.getLong("genre_id");
-                var createdAt = resultSet.getTimestamp("created_at");
-
-                var genre = GenresRepository.findById(genreId).orElseThrow();
-                var book = new Book(title, author, genre);
-                book.setId(id);
-                book.setCreatedAt(createdAt);
-                books.add(book);
-            }
-
-            return books;
-        }
-    }
-
     public static Optional<Book> findById(Long id) throws SQLException {
         var sql = "SELECT * FROM books WHERE id = ?";
 
