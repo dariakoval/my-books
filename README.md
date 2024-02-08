@@ -3,7 +3,8 @@ My Books is a web application that simulates a notepad for working with a list o
 Application has entities: **Book**, **Genre**, **Review**. \
 **Genre** has a *one-to-many* relationship with **Books**. \
 **Review** has a *one-to-one* relationship with the **Book**. \
-CRUD operations are implemented for each entity.
+CRUD operations are implemented for each entity. \
+Application returns JSON response.
 
 Test REST API using Postman:
 * [Import](https://learning.postman.com/docs/integrations/available-integrations/working-with-openAPI/) the file *openapi.yaml* from directory */swagger* into Postman.
