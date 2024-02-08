@@ -27,7 +27,7 @@ Test REST API using Postman:
 * GNU Make
 
 ## Technology stack
-Java, Gradle, GNU Make, Apache Tomcat, JDBC, Lombok, PostgreSQL (development), H2 (testing), JUnit/AssertJ, Unirest, Swagger.
+Java, Gradle, GNU Make, Apache Tomcat, JDBC, HikariCP, Lombok, PostgreSQL (development), H2 (testing), JUnit/AssertJ, Unirest, Swagger.
 
 ## Run
 ```bash
