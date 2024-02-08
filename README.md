@@ -6,6 +6,11 @@ Application has entities: **Book**, **Genre**, **Review**. \
 CRUD operations are implemented for each entity. \
 Application returns JSON response.
 
+---
+Before using the application, add data to the DATABASE_NAME, USER, PASSWORD environment variables to connect to the PostgreSQL database.
+
+---
+
 Test REST API using Postman:
 * [Import](https://learning.postman.com/docs/integrations/available-integrations/working-with-openAPI/) the file *openapi.yaml* from directory */swagger* into Postman.
 * Check that the requests complete successfully.
