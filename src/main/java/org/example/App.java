@@ -24,6 +24,10 @@ import java.util.stream.Collectors;
 
 @Slf4j
 public class App {
+    private static String getDatabaseName() {
+        return System.getenv("DATABASE_NAME");
+    }
+
     private static String getUser() {
         return System.getenv("USER");
     }
@@ -33,7 +37,8 @@ public class App {
     }
 
     private static String getDefaultDatabaseUrl() {
-        return "jdbc:postgresql://localhost:5432/dasha?" + "user=" + getUser() + "&password=" + getPassword();
+        return "jdbc:postgresql://localhost:5432/" + getDatabaseName() +"?"
+                + "user=" + getUser() + "&password=" + getPassword();
     }
 
     private static int getPort() {
