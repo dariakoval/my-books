@@ -37,7 +37,7 @@ public class App {
     }
 
     private static String getDefaultDatabaseUrl() {
-        return "jdbc:postgresql://localhost:5432/" + getDatabaseName() +"?"
+        return "jdbc:postgresql://localhost:5432/" + getDatabaseName() + "?"
                 + "user=" + getUser() + "&password=" + getPassword();
     }
 
