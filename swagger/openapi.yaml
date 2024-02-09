@@ -15,7 +15,21 @@ tags:
     description: Operations with book genres
   - name: Reviews servlet
     description: Operations with book reviews
+  - name: Welcome servlet
+    description: Get greeting
 paths:
+  /:
+    get:
+      tags:
+        - Welcome servlet
+      summary: Get greeting line
+      responses:
+        '200':
+          description: Greeting line
+          content:
+            '*/*':
+              schema:
+                type: string
   /books:
     get:
       tags:
