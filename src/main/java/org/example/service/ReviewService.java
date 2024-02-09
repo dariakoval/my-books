@@ -140,4 +140,22 @@ public class ReviewService {
         out.print(resultJsonString);
         out.flush();
     }
+
+    public static void destroyReview(HttpServletRequest request,
+                                HttpServletResponse response)
+            throws IOException, ServletException {
+
+        String id = getId(request);
+        Long normalizedId = Long.parseLong(Objects.requireNonNull(id));
+
+        try {
+            ReviewsRepository.deleteById(normalizedId);
+        } catch (SQLException e) {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return;
+        }
+
+        response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+    }
+
 }

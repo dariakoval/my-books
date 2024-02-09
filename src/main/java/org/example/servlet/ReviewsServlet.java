@@ -35,6 +35,7 @@ public class ReviewsServlet extends HttpServlet {
         switch (action) {
             case "list" -> ReviewService.createReview(request, response);
             case "edit" -> ReviewService.updateReview(request, response);
+            case "delete" -> ReviewService.destroyReview(request, response);
             default -> response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }

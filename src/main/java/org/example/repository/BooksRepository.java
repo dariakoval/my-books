@@ -77,7 +77,7 @@ public class BooksRepository extends BaseRepository {
                 INNER JOIN genres
                 ON books.genre_id = genres.id
                 WHERE genres.name = '%s'
-                ORDER BY id LIMIT %d OFFSET %d
+                ORDER BY books.id LIMIT %d OFFSET %d
                 """, genreName, rowsPerPage, offset);
 
         try (var conn = dataSource.getConnection();

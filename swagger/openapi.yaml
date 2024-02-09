@@ -502,6 +502,38 @@ paths:
             '*/*':
               schema:
                 type: string
+  /reviews/{id}:
+    get:
+      tags:
+        - Reviews servlet
+      summary: Get specific review by its id
+      parameters:
+        - name: id
+          in: path
+          description: Id of review to be searched
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Found the review
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewDTO'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
   /reviews/{id}/edit:
     post:
       tags:
@@ -534,6 +566,28 @@ paths:
             '*/*':
               schema:
                 type: string
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+  /reviews/{id}/delete:
+    post:
+      tags:
+        - Reviews servlet
+      summary: Delete review by its id
+      parameters:
+        - name: id
+          in: path
+          description: Id of review to be deleted
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Review deleted
         '500':
           description: Internal Server Error
           content:

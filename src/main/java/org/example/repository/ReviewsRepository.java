@@ -89,4 +89,14 @@ public class ReviewsRepository extends BaseRepository {
             review.setId(review.getBook().getId());
         }
     }
+
+    public static void deleteById(Long id) throws SQLException {
+        var sql = "DELETE FROM reviews WHERE book_id = ?";
+
+        try (var conn = dataSource.getConnection();
+             var stmt = conn.prepareStatement(sql)) {
+            stmt.setLong(1, id);
+            stmt.execute();
+        }
+    }
 }
