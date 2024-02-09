@@ -206,4 +206,13 @@ public class BooksRepository extends BaseRepository {
             stmt.execute();
         }
     }
+
+    public static void clear() throws SQLException {
+        var sql = "DELETE FROM books";
+
+        try (var conn = dataSource.getConnection();
+             var stmt = conn.createStatement()) {
+            stmt.execute(sql);
+        }
+    }
 }

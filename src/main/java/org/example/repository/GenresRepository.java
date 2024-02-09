@@ -127,4 +127,13 @@ public class GenresRepository extends BaseRepository {
             stmt.execute();
         }
     }
+
+    public static void clear() throws SQLException {
+        var sql = "DELETE FROM genres";
+
+        try (var conn = dataSource.getConnection();
+             var stmt = conn.createStatement()) {
+            stmt.execute(sql);
+        }
+    }
 }
