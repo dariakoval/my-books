@@ -7,7 +7,7 @@ info:
     name: Darya Koval
     url: https://github.com/dariakoval
 servers:
-  - url: http://localhost:8080
+  - url: http://localhost:8081
 tags:
   - name: Books servlet
     description: Operations with books
