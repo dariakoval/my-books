@@ -32,6 +32,7 @@ Java, Gradle, GNU Make, Apache Tomcat, JDBC, HikariCP, Lombok, PostgreSQL (devel
 ## Run
 ```bash
 make start
+# Open http://localhost:8081
 ```
 
 ## REST API documentation
