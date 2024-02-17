@@ -30,7 +30,7 @@ public class BookService {
         String currentPage = request.getParameter("page");
         int normalizedPage = currentPage == null ? 1 : Integer.parseInt(currentPage);
 
-        String searchAuthor = request.getParameter("author");
+        String searchAuthor = request.getParameter("author"); //  в константу
         String searchGenre = request.getParameter("genre");
 
         List<Book> books;

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class GenresRepository extends BaseRepository {
+public class GenresRepository extends BaseRepository { // тут замечания такие же как в другом репозитории
     public static List<Genre> findEntities(int page, int rowsPerPage) throws SQLException {
         var offset = page * rowsPerPage;
         var sql = String.format("""

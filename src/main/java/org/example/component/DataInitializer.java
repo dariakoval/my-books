@@ -41,7 +41,7 @@ public class DataInitializer {
             var author = list.get(1);
             var genreName = list.get(2);
 
-            try {
+            try { // try лучше всегда выносить в отдельный метод, так будет читаемее.
                 var genre = GenresRepository.findByName(genreName)
                         .orElseThrow(() -> new RuntimeException("Genre not found"));
                 var book = new Book(title, author, genre);
