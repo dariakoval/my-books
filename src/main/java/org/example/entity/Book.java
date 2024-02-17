@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 @Getter
 @Setter
-public class Book {
+public class Book { // почему у сещности нет equals и hashcode? как их отличать друг от друга?
 
     private Long id;
 

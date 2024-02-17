@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ReviewsRepository extends BaseRepository {
+public class ReviewsRepository extends BaseRepository { // и тут
     public static List<Review> findEntities(int page, int rowsPerPage) throws SQLException {
         var offset = page * rowsPerPage;
         var sql = String.format("""

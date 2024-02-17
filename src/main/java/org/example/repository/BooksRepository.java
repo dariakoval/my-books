@@ -23,7 +23,7 @@ public class BooksRepository extends BaseRepository {
             var books = new ArrayList<Book>();
 
             while (resultSet.next()) {
-                var id = resultSet.getLong("id");
+                var id = resultSet.getLong("id"); // вот эту часть кода тоже надо в маппер, тут ведь просто собирается объект
                 var title = resultSet.getString("title");
                 var author = resultSet.getString("author");
                 var genreId = resultSet.getLong("genre_id");
@@ -156,7 +156,7 @@ public class BooksRepository extends BaseRepository {
     }
 
     public static void save(Book book) throws SQLException {
-        String sql = "INSERT INTO books (title, author, genre_id, created_at) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO books (title, author, genre_id, created_at) VALUES (?, ?, ?, ?)"; // это лучше в константу
         var datetime = new Timestamp(System.currentTimeMillis());
 
         try (var conn = dataSource.getConnection();
