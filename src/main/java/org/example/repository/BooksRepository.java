@@ -2,6 +2,7 @@ package org.example.repository;
 
 import org.example.entity.Book;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
@@ -112,21 +113,23 @@ public class BooksRepository extends BaseRepository {
             var resultSet = stmt.executeQuery();
 
             if (resultSet.next()) {
-                var title = resultSet.getString("title");
-                var author = resultSet.getString("author");
-                var genreId = resultSet.getLong("genre_id");
-                var createdAt = resultSet.getTimestamp("created_at");
-
-                var genre = GenresRepository.findById(genreId).orElseThrow();
-                var book = new Book(title, author, genre);
-                book.setId(id);
-                book.setCreatedAt(createdAt);
-
-                return Optional.of(book);
+                return Optional.of(map(resultSet));
             }
-
             return Optional.empty();
         }
+    }
+
+    private static Book map(ResultSet resultSet) throws SQLException {
+        var id = resultSet.getLong("id");
+        var title = resultSet.getString("title");
+        var author = resultSet.getString("author");
+        var genreId = resultSet.getLong("genre_id");
+        var createdAt = resultSet.getTimestamp("created_at");
+        var genre = GenresRepository.findById(genreId).orElseThrow();
+
+        return new Book(title, author, genre)
+                .setId(id)
+                .setCreatedAt(createdAt);
     }
 
     public static Optional<Book> findByTitle(String bookTitle) throws SQLException {
@@ -138,17 +141,7 @@ public class BooksRepository extends BaseRepository {
             var resultSet = stmt.executeQuery();
 
             if (resultSet.next()) {
-                var id = resultSet.getLong("id");
-                var author = resultSet.getString("author");
-                var genreId = resultSet.getLong("genre_id");
-                var createdAt = resultSet.getTimestamp("created_at");
-
-                var genre = GenresRepository.findById(genreId).orElseThrow();
-                var book = new Book(bookTitle, author, genre);
-                book.setId(id);
-                book.setCreatedAt(createdAt);
-
-                return Optional.of(book);
+                return Optional.of(map(resultSet));
             }
 
             return Optional.empty();

@@ -2,11 +2,13 @@ package org.example.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.sql.Timestamp;
 
 @Getter
 @Setter
+@Accessors(chain = true)
 public class Book { // почему у сещности нет equals и hashcode? как их отличать друг от друга?
 
     private Long id;
